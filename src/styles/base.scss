@@ -1,0 +1,29 @@
+@for $i from 0 through 6 {
+  .ma-#{$i * 5} {
+    margin: 5px * $i;
+  }
+}
+
+@for $i from 1 to 6 {
+  .mt-#{$i * 5} {
+    margin-top: $i * 5px;
+  }
+}
+
+@for $i from 1 to 6 {
+  .mt-#{$i * 5} {
+    margin-top: $i * 5px;
+  }
+}
+
+@for $i from 1 to 6 {
+  .mt-#{$i * 5} {
+    margin-top: $i * 5px;
+  }
+}
+
+@for $i from 1 to 6 {
+  .mt-#{$i * 5} {
+    margin-top: $i * 5px;
+  }
+}

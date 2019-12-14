@@ -1,0 +1,28 @@
+@import "./base.scss";
+
+.sq-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.center{
+  margin: auto;
+  width: 88%;
+  border: 1px solid black;
+  
+}
+
+body {
+  background: powderblue;
+}
+
+@mixin square($height, $width, $bgcol) {
+  height: $height;
+  width: $width;
+  background: $bgcol;
+}
+
+.small-square {
+  @include square(100px, 100px, black);
+}
