@@ -5,17 +5,19 @@ import "../styles/rwd.scss";
 export default function RwdContent() {
   return (
     <div className="sq-container center">
-      <div className="small-square mt-10"></div>
-      <div className="small-square mt-10"></div>
-      <div className="small-square mt-10"></div>
-      <div className="small-square mt-10"></div>
-      <div className="small-square mt-10"></div>
-      <div className="small-square mt-10"></div>
-      <div className="small-square mt-10"></div>
-      <div className="small-square mt-10"></div>
-      <div className="small-square mt-10"></div>
-      <div className="small-square mt-10"></div>
-      <div className="small-square mt-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
+      <div className="small-square ma-10"></div>
 
 
 

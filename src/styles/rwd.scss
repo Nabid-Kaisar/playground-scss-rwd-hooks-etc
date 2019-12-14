@@ -21,8 +21,9 @@ body {
   height: $height;
   width: $width;
   background: $bgcol;
+
 }
 
 .small-square {
-  @include square(100px, 100px, black);
+  @include square(70px, 70px, black);
 }
