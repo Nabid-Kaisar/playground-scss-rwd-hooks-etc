@@ -1,18 +1,21 @@
-import React, { useState, useRef } from "react";
+//takes image as prop, and notifyParent function.
+//render the image in the back of flippable card
+//notify the parent about which card was clicked
 
-import allImages from "./imageImports";
-import ReactCardFlip from "react-card-flip";
+import React, { useState, useRef } from "react";
 import dota2logo from "../resources/images/dota2logo.jpg";
+import PropTypes from "prop-types";
 
 export default function SingleCardView(props) {
   const [isFlipped, doFlip] = useState(false);
   const flipCardInnerNode = useRef(null);
+  const heroImgNode = useRef(null);
 
   const handleFlip = () => {
     doFlip(true);
     flipCardInnerNode.current.classList.add("flip-card-inner-transform");
 
-    props.notifyParent("asd");
+    props.notifyParent(heroImgNode.current.name);
 
     setTimeout(() => {
       doFlip(false);
@@ -21,14 +24,17 @@ export default function SingleCardView(props) {
   };
 
   const extractImgName = () => {
-    // Object.keys(props.image,)
-    // console.log(props.image);
+    return props.image
+      .split("\\")
+      .pop()
+      .split("/")
+      .pop()
+      .split("_")[0];
   };
 
   return (
     <>
       <div className="flip-card">
-        {extractImgName()}
         <div id="inner" className="flip-card-inner" ref={flipCardInnerNode}>
           <div className="flip-card-front">
             <img
@@ -40,10 +46,21 @@ export default function SingleCardView(props) {
             />
           </div>
           <div id="back" className="flip-card-back">
-            <img className="card-img" src={props.image} />
+            <img
+              className="card-img"
+              src={props.image}
+              name={extractImgName()}
+              alt={extractImgName()}
+              ref={heroImgNode}
+            />
           </div>
         </div>
       </div>
     </>
   );
 }
+
+SingleCardView.propTypes = {
+  image: PropTypes.string.isRequired,
+  notifyParent: PropTypes.func
+};
