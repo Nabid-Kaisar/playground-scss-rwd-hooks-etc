@@ -8,13 +8,33 @@ function SingleCardViewTest() {
   };
 
   const allCardsJsx = () => {
-    return allImagesArr.map((im, idx) => (
-      <SingleCardView
-        key={idx}
-        image={im}
-        notifyParent={whoFlipped}
-      />
-    ));
+    let allCardsViewArr = [];
+
+    allImagesArr.forEach((im, idx) => {
+      allCardsViewArr.push(
+        <SingleCardView
+          key={"prim-card-" + idx}
+          image={im}
+          notifyParent={whoFlipped}
+        />
+      );
+      allCardsViewArr.push(
+        <SingleCardView
+          key={"sec-card-" + idx}
+          image={im}
+          notifyParent={whoFlipped}
+        />
+      );
+    });
+    return shuffleArr(allCardsViewArr);
+  };
+
+  const shuffleArr = a => {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
   };
 
   return (
