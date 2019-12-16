@@ -1,14 +1,13 @@
 import React from "react";
-import Try1 from "./Try1";
-import RwdContent from "./rwd/RwdContent";
-import "./App.css";
+import SingleCardViewTest from "./cardView/singleCardViewTest";
+import allImagesArr from "./cardView/imageImports";
+import "./styles/App.scss";
 
 function App() {
   return (
-    <div>
-      <RwdContent />
-      {/* <Try1 /> */}
-    </div>
+    <>
+      <SingleCardViewTest />
+    </>
   );
 }
 
