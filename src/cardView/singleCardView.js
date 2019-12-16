@@ -1,6 +1,7 @@
 //takes image as prop, and notifyParent function.
 //render the image in the back of flippable card
 //notify the parent about which card was clicked
+//card can be perma flipped by props.matched=true
 
 import React, { useState, useRef } from "react";
 import dota2logo from "../resources/images/dota2logo.jpg";
@@ -19,7 +20,9 @@ export default function SingleCardView(props) {
 
     setTimeout(() => {
       doFlip(false);
-      flipCardInnerNode.current.classList.remove("flip-card-inner-transform");
+      if (!props.matched) {
+        flipCardInnerNode.current.classList.remove("flip-card-inner-transform");
+      }
     }, 800);
   };
 
@@ -62,5 +65,6 @@ export default function SingleCardView(props) {
 
 SingleCardView.propTypes = {
   image: PropTypes.string.isRequired,
-  notifyParent: PropTypes.func
+  notifyParent: PropTypes.func,
+  matched: PropTypes.bool
 };
