@@ -1,11 +1,11 @@
 import React from "react";
-import SingleCardViewTest from "./cardView/singleCardViewTest";
+import MultiCardHandler from "./Container/MultiCardHandler";
 import "./styles/App.scss";
 
 function App() {
   return (
     <>
-      <SingleCardViewTest />
+      <MultiCardHandler />
     </>
   );
 }

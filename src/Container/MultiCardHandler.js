@@ -1,8 +1,8 @@
 import React from "react";
-import SingleCardView from "./singleCardView";
+import SingleCardView from "../Presentational/singleCardView";
 import allImagesArr from "./imageImports";
 
-function SingleCardViewTest() {
+function MultiCardHandler() {
   const whoFlipped = imgName => {
     console.log(imgName);
   };
@@ -44,4 +44,4 @@ function SingleCardViewTest() {
   );
 }
 
-export default SingleCardViewTest;
+export default MultiCardHandler;
