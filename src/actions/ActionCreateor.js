@@ -5,8 +5,7 @@ export const defineInitialArr = arrLength => ({
   arrLength
 });
 
-
-export const MAKE_MATCHED_TRUE = index => ({
-    type: MAKE_MATCHED_TRUE,
-    index
-})
+export const makeMatchedTrue = index => ({
+  type: MAKE_MATCHED_TRUE,
+  index
+});
