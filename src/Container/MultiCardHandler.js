@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 class MultiCardHandler extends Component {
   constructor(props) {
     super(props);
-
+    console.log("const");
     props.defineInitialArr(allImagesArr.length * 2);
   }
 
@@ -19,10 +19,11 @@ class MultiCardHandler extends Component {
 
   allCardsJsx = () => {
     let allCardsViewArr = [];
-    console.log(this.state);
+    console.log(this.props.matchArray);
     allImagesArr.forEach((im, idx) => {
       allCardsViewArr.push(
         <SingleCardView
+          matched={this.props.matchArray[idx]}
           key={"prim-card-" + idx}
           image={im}
           notifyParent={this.whoFlipped}
@@ -30,6 +31,7 @@ class MultiCardHandler extends Component {
       );
       allCardsViewArr.push(
         <SingleCardView
+          matched={this.props.matchArray[idx]}
           key={"sec-card-" + idx}
           image={im}
           notifyParent={this.whoFlipped}
@@ -57,7 +59,7 @@ class MultiCardHandler extends Component {
 }
 
 const mapStateToProps = state => {
-  return { matchArr: state.MatchedReducer };
+  return { matchArray: state.matchArray };
 };
 
 const mapDispatchToProps = dispatch => {

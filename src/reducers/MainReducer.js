@@ -1,4 +1,4 @@
 import { combineReducers } from "redux";
-import MatchedReducer from "./MatchedReducer";
+import matchArray from "./MatchedReducer";
 
-export default combineReducers({ MatchedReducer });
+export default combineReducers({ matchArray });
