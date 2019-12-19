@@ -37,7 +37,7 @@ const MathcedReducer = (state = INITIAL_DATA, action) => {
         //second check is for img uniqueness check
         if (
           currentBuffer[0] === currentBuffer[2] &&
-          currentBuffer[1] === currentBuffer[3]
+          currentBuffer[1] !== currentBuffer[3]
         ) {
           //update hero match = true
           //flush currentBuffer

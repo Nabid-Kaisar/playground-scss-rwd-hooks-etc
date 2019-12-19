@@ -14,8 +14,21 @@ class MultiCardHandler extends Component {
   constructor(props) {
     super(props);
 
+    this.doubledAllImagesArr = allImagesArr;
+    this.addDuplicateImg(allImagesArr);
+    this.shuffledDoubledAllImagesArr = this.shuffleArr(
+      this.doubledAllImagesArr
+    );
+    console.log(this.shuffledDoubledAllImagesArr);
+
     props.defineInitialArr(allImagesArr);
   }
+
+  addDuplicateImg = allImagesArr => {
+    allImagesArr.forEach((img, idx) => {
+      this.doubledAllImagesArr.push(`${img}_dup`);
+    });
+  };
 
   whoFlipped = (imgName, sameImgCount) => {
     console.log(imgName, sameImgCount);
@@ -25,29 +38,34 @@ class MultiCardHandler extends Component {
   allCardsJsx = () => {
     let allCardsViewArr = [];
     console.log(this.props);
-    allImagesArr.forEach((im, idx) => {
-      let imgName = extractImgName(im);
+    this.shuffledDoubledAllImagesArr.forEach((im, idx) => {
+      let imgName = extractImgName(im); //cleaned images name
 
-      allCardsViewArr.push(
-        <SingleCardView
-          matched={this.props.matchArray[imgName]}
-          key={"prim-card-" + idx}
-          image={im}
-          sameImgCount={1}
-          notifyParent={this.whoFlipped}
-        />
-      );
-      allCardsViewArr.push(
-        <SingleCardView
-          matched={this.props.matchArray[imgName]}
-          key={"sec-card-" + idx}
-          image={im}
-          sameImgCount={2}
-          notifyParent={this.whoFlipped}
-        />
-      );
+      if (im.endsWith("_dup")) {
+        im = im.slice(0, im.length - 4); //removing _dup str at last
+
+        allCardsViewArr.push(
+          <SingleCardView
+            matched={this.props.matchArray[imgName]}
+            key={"sec-card-" + idx}
+            image={im}
+            sameImgCount={2}
+            notifyParent={this.whoFlipped}
+          />
+        );
+      } else {
+        allCardsViewArr.push(
+          <SingleCardView
+            matched={this.props.matchArray[imgName]}
+            key={"prim-card-" + idx}
+            image={im}
+            sameImgCount={1}
+            notifyParent={this.whoFlipped}
+          />
+        );
+      }
     });
-    return this.shuffleArr(allCardsViewArr);
+    return allCardsViewArr;
   };
 
   shuffleArr = a => {

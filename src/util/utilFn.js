@@ -6,3 +6,5 @@ export const extractImgName = str => {
     .pop()
     .split("_")[0];
 };
+
+
