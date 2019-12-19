@@ -17,8 +17,8 @@ export default function SingleCardView(props) {
     doFlip(true);
     flipCardInnerNode.current.classList.add("flip-card-inner-transform");
 
-    props.notifyParent(heroImgNode.current.name);
-    
+    props.notifyParent(heroImgNode.current.name, props.sameImgCount);
+
     setTimeout(() => {
       doFlip(false);
       if (!props.matched) {
@@ -38,6 +38,7 @@ export default function SingleCardView(props) {
 
   return (
     <>
+    {console.log(props)}
       <div className="flip-card">
         <div
           id="inner"

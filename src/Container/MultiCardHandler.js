@@ -14,8 +14,8 @@ class MultiCardHandler extends Component {
     props.defineInitialArr(allImagesArr);
   }
 
-  whoFlipped = imgName => {
-    console.log(imgName);
+  whoFlipped = (imgName, sameImgCount) => {
+    console.log(imgName, sameImgCount);
   };
 
   allCardsJsx = () => {
@@ -26,17 +26,19 @@ class MultiCardHandler extends Component {
 
       allCardsViewArr.push(
         <SingleCardView
-          matched={this.props.matchArray.imgName}
+          matched={this.props.matchArray[imgName]}
           key={"prim-card-" + idx}
           image={im}
+          sameImgCount={1}
           notifyParent={this.whoFlipped}
         />
       );
       allCardsViewArr.push(
         <SingleCardView
-          matched={this.props.matchArray.imgName}
+          matched={this.props.matchArray[imgName]}
           key={"sec-card-" + idx}
           image={im}
+          sameImgCount={2}
           notifyParent={this.whoFlipped}
         />
       );
