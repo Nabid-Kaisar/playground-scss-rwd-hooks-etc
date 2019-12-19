@@ -18,7 +18,8 @@ const MathcedReducer = (state = INITIAL_DATA, action) => {
       console.log(action);
       let newObj = {};
       for (let i = 0; i < action.imgArr.length; i++) {
-        Object.assign(state, { [extractImgName(action.imgArr[i])]: false });
+        // console.log({ [extractImgName(action.imgArr[i])]: true });
+        Object.assign(newObj, { [extractImgName(action.imgArr[i])]: true });
       }
 
       console.log(newObj);
