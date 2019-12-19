@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import SingleCardView from "../Presentational/singleCardView";
 import allImagesArr from "./imageImports";
-
-import { connect } from "react-redux";
-import {
-  defineInitialArr,
-  addToCurrentBuffer
-} from "../actions/ActionCreateor";
-import { bindActionCreators } from "redux";
 import { extractImgName } from "../util/utilFn";
 
 class MultiCardHandler extends Component {
@@ -20,9 +13,16 @@ class MultiCardHandler extends Component {
       this.doubledAllImagesArr
     );
     console.log(this.shuffledDoubledAllImagesArr);
-
-    props.defineInitialArr(allImagesArr);
   }
+
+  state = {};
+
+  componentDidMount = () => {
+    for (let i = 0; i < allImagesArr.length; i++) {
+      this.setState({ [extractImgName(allImagesArr[i])]: false });
+    }
+    this.setState({ currentBuffer: [] });
+  };
 
   addDuplicateImg = allImagesArr => {
     allImagesArr.forEach((img, idx) => {
@@ -32,12 +32,41 @@ class MultiCardHandler extends Component {
 
   whoFlipped = (imgName, sameImgCount) => {
     console.log(imgName, sameImgCount);
-    this.props.addToCurrentBuffer(imgName, sameImgCount);
+    this.addToCurrentBuffer(imgName, sameImgCount); //this.addto...
+  };
+
+  addToCurrentBuffer = (imgName, sameImgCount) => {
+    let currentBuffer = [...this.state.currentBuffer];
+    currentBuffer.push(imgName, sameImgCount);
+
+    if (currentBuffer.length === 2) {
+      this.setState({ currentBuffer }, () => {
+        // console.log(this.state.currentBuffer);
+      });
+    } else {
+      //first check is for image name
+      //second check is for img uniqueness check
+      if (
+        currentBuffer[0] === currentBuffer[2] &&
+        currentBuffer[1] !== currentBuffer[3]
+      ) {
+        //update hero match = true
+        //flush currentBuffer
+        this.setState({ [imgName]: true, currentBuffer: [] }, () => {
+          // console.log(this.state.currentBuffer, this.state[imgName]);
+        });
+      } else {
+        //flush currentBuffer
+        this.setState({ currentBuffer: [] }, () => {
+          // console.log(this.state.currentBuffer, this.state[imgName]);
+        });
+      }
+    }
   };
 
   allCardsJsx = () => {
     let allCardsViewArr = [];
-    console.log(this.props);
+
     this.shuffledDoubledAllImagesArr.forEach((im, idx) => {
       let imgName = extractImgName(im); //cleaned images name
 
@@ -46,7 +75,7 @@ class MultiCardHandler extends Component {
 
         allCardsViewArr.push(
           <SingleCardView
-            matched={this.props.matchArray[imgName]}
+            matched={this.state[imgName]}
             key={"sec-card-" + idx}
             image={im}
             sameImgCount={2}
@@ -56,7 +85,7 @@ class MultiCardHandler extends Component {
       } else {
         allCardsViewArr.push(
           <SingleCardView
-            matched={this.props.matchArray[imgName]}
+            matched={this.state[imgName]}
             key={"prim-card-" + idx}
             image={im}
             sameImgCount={1}
@@ -86,18 +115,4 @@ class MultiCardHandler extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { matchArray: state.matchArray };
-};
-
-const mapDispatchToProps = dispatch => {
-  return bindActionCreators(
-    {
-      defineInitialArr,
-      addToCurrentBuffer
-    },
-    dispatch
-  );
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MultiCardHandler);
+export default MultiCardHandler;
