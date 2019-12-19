@@ -3,7 +3,10 @@ import SingleCardView from "../Presentational/singleCardView";
 import allImagesArr from "./imageImports";
 
 import { connect } from "react-redux";
-import { defineInitialArr } from "../actions/ActionCreateor";
+import {
+  defineInitialArr,
+  addToCurrentBuffer
+} from "../actions/ActionCreateor";
 import { bindActionCreators } from "redux";
 import { extractImgName } from "../util/utilFn";
 
@@ -16,6 +19,7 @@ class MultiCardHandler extends Component {
 
   whoFlipped = (imgName, sameImgCount) => {
     console.log(imgName, sameImgCount);
+    this.props.addToCurrentBuffer(imgName, sameImgCount);
   };
 
   allCardsJsx = () => {
@@ -47,6 +51,7 @@ class MultiCardHandler extends Component {
   };
 
   shuffleArr = a => {
+    console.log("shuffle");
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
@@ -70,7 +75,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      defineInitialArr
+      defineInitialArr,
+      addToCurrentBuffer
     },
     dispatch
   );

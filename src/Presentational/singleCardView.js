@@ -38,7 +38,7 @@ export default function SingleCardView(props) {
 
   return (
     <>
-    {console.log(props)}
+    {/* {console.log(props)} */}
       <div className="flip-card">
         <div
           id="inner"
