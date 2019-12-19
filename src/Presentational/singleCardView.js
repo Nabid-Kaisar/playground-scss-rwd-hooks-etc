@@ -6,6 +6,7 @@
 import React, { useState, useRef } from "react";
 import dota2logo from "../resources/images/dota2logo.jpg";
 import PropTypes from "prop-types";
+import { extractImgName } from "../util/utilFn";
 
 export default function SingleCardView(props) {
   const [isFlipped, doFlip] = useState(false);
@@ -17,7 +18,7 @@ export default function SingleCardView(props) {
     flipCardInnerNode.current.classList.add("flip-card-inner-transform");
 
     props.notifyParent(heroImgNode.current.name);
-
+    
     setTimeout(() => {
       doFlip(false);
       if (!props.matched) {
@@ -38,7 +39,15 @@ export default function SingleCardView(props) {
   return (
     <>
       <div className="flip-card">
-        <div id="inner" className="flip-card-inner" ref={flipCardInnerNode}>
+        <div
+          id="inner"
+          className={
+            props.matched
+              ? "flip-card-inner flip-card-inner-transform"
+              : "flip-card-inner"
+          }
+          ref={flipCardInnerNode}
+        >
           <div className="flip-card-front">
             <img
               src={dota2logo}
@@ -52,8 +61,8 @@ export default function SingleCardView(props) {
             <img
               className="card-img"
               src={props.image}
-              name={extractImgName()}
-              alt={extractImgName()}
+              name={extractImgName(props.image)}
+              alt={extractImgName(props.image)}
               ref={heroImgNode}
             />
           </div>

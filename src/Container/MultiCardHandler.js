@@ -5,12 +5,13 @@ import allImagesArr from "./imageImports";
 import { connect } from "react-redux";
 import { defineInitialArr } from "../actions/ActionCreateor";
 import { bindActionCreators } from "redux";
+import { extractImgName } from "../util/utilFn";
 
 class MultiCardHandler extends Component {
   constructor(props) {
     super(props);
-    console.log("const");
-    props.defineInitialArr(allImagesArr.length * 2);
+
+    props.defineInitialArr(allImagesArr);
   }
 
   whoFlipped = imgName => {
@@ -19,11 +20,13 @@ class MultiCardHandler extends Component {
 
   allCardsJsx = () => {
     let allCardsViewArr = [];
-    console.log(this.props.matchArray);
+    console.log(this.props);
     allImagesArr.forEach((im, idx) => {
+      let imgName = extractImgName(im);
+
       allCardsViewArr.push(
         <SingleCardView
-          matched={this.props.matchArray[idx]}
+          matched={this.props.matchArray.imgName}
           key={"prim-card-" + idx}
           image={im}
           notifyParent={this.whoFlipped}
@@ -31,7 +34,7 @@ class MultiCardHandler extends Component {
       );
       allCardsViewArr.push(
         <SingleCardView
-          matched={this.props.matchArray[idx]}
+          matched={this.props.matchArray.imgName}
           key={"sec-card-" + idx}
           image={im}
           notifyParent={this.whoFlipped}

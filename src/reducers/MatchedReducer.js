@@ -3,7 +3,9 @@ import {
   DEFINE_INITIAL_MATCHED_ARR
 } from "../actions/ActionsTypes";
 
-const INITIAL_DATA = [];
+import { extractImgName } from "../util/utilFn";
+
+const INITIAL_DATA = {};
 
 const MathcedReducer = (state = INITIAL_DATA, action) => {
   switch (action.type) {
@@ -13,13 +15,14 @@ const MathcedReducer = (state = INITIAL_DATA, action) => {
 
     case DEFINE_INITIAL_MATCHED_ARR:
       //make arr of all false. length found from action obj
-      let newArr = [];
       console.log(action);
-      for (let i = 0; i < action.arrLength; i++) {
-        newArr.push(false);
+      let newObj = {};
+      for (let i = 0; i < action.imgArr.length; i++) {
+        Object.assign(state, { [extractImgName(action.imgArr[i])]: false });
       }
-      console.log(newArr);
-      return newArr;
+
+      console.log(newObj);
+      return newObj;
 
     default:
       return state;
