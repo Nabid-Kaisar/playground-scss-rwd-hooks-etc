@@ -13,8 +13,8 @@ class MultiCardHandler extends Component {
     props.defineInitialArr(allImagesArr.length * 2);
   }
 
-  whoFlipped = imgName => {
-    console.log(imgName);
+  whoFlipped = (imgName, sameImgCount) => {
+    console.log(imgName, sameImgCount);
   };
 
   allCardsJsx = () => {
@@ -26,6 +26,7 @@ class MultiCardHandler extends Component {
           matched={this.props.matchArray[idx]}
           key={"prim-card-" + idx}
           image={im}
+          sameImgCount={1}
           notifyParent={this.whoFlipped}
         />
       );
@@ -34,6 +35,7 @@ class MultiCardHandler extends Component {
           matched={this.props.matchArray[idx]}
           key={"sec-card-" + idx}
           image={im}
+          sameImgCount={2}
           notifyParent={this.whoFlipped}
         />
       );
