@@ -9,29 +9,40 @@ import PropTypes from "prop-types";
 import { extractImgName } from "../util/utilFn";
 
 export default class SingleCardView extends Component {
-  // const [isFlipped, doFlip] = useState(false);
-  // const flipCardInnerNode = useRef(null);
-  // const heroImgNode = useRef(null);
-
   handleFlip = () => {
     this.flipCardInnerNode.classList.add("flip-card-inner-transform");
+    this.disableClicks();
 
     this.props.notifyParent(this.heroImgNode.name, this.props.sameImgCount);
     console.log(this.props.matched);
     setTimeout(() => {
       console.log(this.props.matched);
+
+      this.enableClicks();
       if (!this.props.matched) {
-        // this props is from previous render
-        //that's why it is wrong
         this.flipCardInnerNode.classList.remove("flip-card-inner-transform");
       }
     }, 800);
   };
 
+  disableClicks = () => {
+    let nodes = document.getElementsByClassName("flip-card");
+    for (let i = 0; i < nodes.length; i++) {
+      console.log(nodes[i]);
+      nodes[i].style.pointerEvents = "none";
+    }
+  };
+
+  enableClicks = () => {
+    let nodes = document.getElementsByClassName("flip-card");
+    for (let i = 0; i < nodes.length; i++) {
+      nodes[i].style.pointerEvents = "auto";
+    }
+  };
+
   render() {
     return (
       <>
-        {/* {console.log(props)} */}
         <div className="flip-card">
           <div
             id="inner"
