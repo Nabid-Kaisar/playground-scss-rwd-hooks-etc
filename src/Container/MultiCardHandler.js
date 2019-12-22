@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SingleCardView from "../Presentational/singleCardView";
+import StopWatchView from "../Presentational/StopWatchView";
 import allImagesArr from "./imageImports";
 
 import { connect } from "react-redux";
@@ -80,7 +81,10 @@ class MultiCardHandler extends Component {
   render() {
     return (
       <>
-        <div className="all-cards-container">{this.allCardsJsx()}</div>
+        <div className="all-cards-container">
+          {this.allCardsJsx()}
+          <StopWatchView />
+        </div>
       </>
     );
   }
