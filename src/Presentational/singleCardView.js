@@ -9,18 +9,18 @@ import PropTypes from "prop-types";
 import { extractImgName } from "../util/utilFn";
 
 export default function SingleCardView(props) {
-  const [isFlipped, doFlip] = useState(false);
+  // const [isFlipped, doFlip] = useState(false);
   const flipCardInnerNode = useRef(null);
   const heroImgNode = useRef(null);
 
   const handleFlip = () => {
-    doFlip(true);
+    // doFlip(true);
     flipCardInnerNode.current.classList.add("flip-card-inner-transform");
 
     props.notifyParent(heroImgNode.current.name, props.sameImgCount);
 
     setTimeout(() => {
-      doFlip(false);
+      // doFlip(false);
       console.log(props.matched);
       if (!props.matched) {
         flipCardInnerNode.current.classList.remove("flip-card-inner-transform");
